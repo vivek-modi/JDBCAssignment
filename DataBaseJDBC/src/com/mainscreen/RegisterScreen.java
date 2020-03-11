@@ -91,6 +91,12 @@ public class RegisterScreen {
 		frame.getContentPane().add(comboBox);
 
 		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LoginScreen().frame.setVisible(true);
+				frame.dispose();
+			}
+		});
 		btnNewButton.setBounds(143, 306, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 
