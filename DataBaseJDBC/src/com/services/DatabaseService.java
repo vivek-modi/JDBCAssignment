@@ -44,17 +44,22 @@ public class DatabaseService {
 		return num;
 	}
 
-//	public static String[] getItemTypes() throws SQLException {
-//
-//		PreparedStatement statement = DbConnect.getInstance().prepareStatement("SELECT DISTINCT item_type FROM items");
-//		ResultSet rs = statement.executeQuery();
-//		ArrayList<String> ItemTypes = new ArrayList<String>();
-//		while (rs.next()) {
-//			ItemTypes.add(rs.getString(1));
-//		}
-//		String[] type = new String[ItemTypes.size()];
-//		return type = ItemTypes.toArray(type);
-//	}
+	public static boolean InsertEmployee(String fname, String lname, String gender, String designation,
+			String department) {
+		try {
+			PreparedStatement statement = DbConnect.getInstance().prepareStatement(
+					"insert into employees(firstname,lastname,gender,designation,department) values(?,?,?,?,?)");
+			statement.setString(1, fname);
+			statement.setString(2, lname);
+			statement.setString(3, gender);
+			statement.setString(4, designation);
+			statement.setString(5, department);
+			return (statement.executeUpdate() == 1) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public static boolean InsertItem(String itemName, String itemType, int price, int qunatity) {
 		try {
