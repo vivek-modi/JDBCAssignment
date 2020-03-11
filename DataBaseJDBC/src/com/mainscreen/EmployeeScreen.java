@@ -74,7 +74,7 @@ public class EmployeeScreen {
 		JMenuItem menu_exit = new JMenuItem("EXIT");
 		menu_exit.setFont(new Font("Arial", Font.BOLD, 11));
 		mnOptions.add(menu_exit);
-		
+
 		JButton btnNewButton = new JButton("Product");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,6 +84,16 @@ public class EmployeeScreen {
 		});
 		btnNewButton.setBounds(43, 93, 89, 23);
 		frame.getContentPane().add(btnNewButton);
+
+		JButton btnEmployee = new JButton("Employee");
+		btnEmployee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AddEmployeeScreen().frame.setVisible(true);
+				frame.dispose();
+			}
+		});
+		btnEmployee.setBounds(255, 93, 89, 23);
+		frame.getContentPane().add(btnEmployee);
 		menu_exit.addActionListener(new ActionListener() {
 
 			@Override
