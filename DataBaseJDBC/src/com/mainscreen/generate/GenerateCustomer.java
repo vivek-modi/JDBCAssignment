@@ -57,7 +57,7 @@ public class GenerateCustomer {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 879, 508);
+		frame.setBounds(100, 100, 683, 428);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
@@ -74,12 +74,12 @@ public class GenerateCustomer {
 		frame.getContentPane().add(lblNewLabel);
 
 		btnNewButton = new JButton("Export  Customer");
-		btnNewButton.setBounds(42, 390, 145, 23);
+		btnNewButton.setBounds(195, 312, 145, 23);
 		frame.getContentPane().add(btnNewButton);
 
 		btnGenerateOrder = new JButton("Export Order");
 
-		btnGenerateOrder.setBounds(254, 390, 145, 23);
+		btnGenerateOrder.setBounds(427, 312, 145, 23);
 		frame.getContentPane().add(btnGenerateOrder);
 
 		btnBack = new JButton("Back");

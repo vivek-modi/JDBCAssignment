@@ -28,6 +28,21 @@ public class DatabaseService {
 		return false;
 	}
 
+	public static boolean Register_Customer(String firstName, String LastName, String Address, int number) {
+		try {
+			PreparedStatement statement = DbConnect.getInstance().prepareStatement(
+					"insert into customers(customer_firstname,customer_lastname,customer_address,customer_number) values(?,?,?,?)");
+			statement.setString(1, firstName);
+			statement.setString(2, LastName);
+			statement.setString(3, Address);
+			statement.setInt(4, number);
+			return (statement.executeUpdate() > 0) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public static int Login(String username, String password) {
 		int num = 2;
 		try {
