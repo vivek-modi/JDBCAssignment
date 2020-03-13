@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.mainscreen.EmployeeScreen;
 import com.services.DatabaseService;
 import com.utils.ProductData;
 import javax.swing.JLabel;
@@ -19,9 +20,11 @@ import java.awt.event.ActionEvent;
 
 public class GenerateReport {
 
-	protected JFrame frame;
-	private JTable table;
-	private DefaultTableModel model;
+	public JFrame frame;
+	private static JTable table;
+	private static DefaultTableModel model;
+	private static ArrayList<ProductData> data;
+	private static JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -65,30 +68,31 @@ public class GenerateReport {
 				new DefaultTableModel(new Object[][] {}, new String[] { "Id", "Name", "Type", "Price", "Qunatity" }));
 		scrollPane.setViewportView(table);
 
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(26, 469, 150, 14);
 		frame.getContentPane().add(lblNewLabel);
 
 		JButton btnNewButton = new JButton("Export");
-		btnNewButton.setBounds(769, 101, 89, 23);
+		btnNewButton.setBounds(769, 158, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Delete");
 
-		btnNewButton_1.setBounds(769, 183, 89, 23);
+		btnNewButton_1.setBounds(769, 260, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 
-		ArrayList<ProductData> data = DatabaseService.ReadProductData();
-
-		if (data == null) {
-			lblNewLabel.setText("No Product Found");
-		} else {
-			model = (DefaultTableModel) table.getModel();
-			for (ProductData productData : data) {
-				model.addRow(new Object[] { productData.getItem_id(), productData.getItem_name(),
-						productData.getItem_type(), productData.getItem_price(), productData.getItem_quantity() });
+		JButton btnNewButton_2 = new JButton("Back");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new EmployeeScreen().frame.setVisible(true);
+				frame.dispose();
 			}
-		}
+		});
+		btnNewButton_2.setBounds(769, 72, 89, 23);
+		frame.getContentPane().add(btnNewButton_2);
+
+		data = DatabaseService.ReadProductData();
+		DisplayData();
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,8 +108,37 @@ public class GenerateReport {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				try {
+					if (table.getSelectedRow() > -1) {
+						lblNewLabel.setText((DatabaseService.DeleteItem(
+								Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString())))
+										? "Data Delete Successfully"
+										: "Error with Deleting Data");
+						DisplayData();
+					} else {
+						lblNewLabel.setText("Please Select Row From Tabel");
+					}
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
 			}
 		});
 
+	}
+
+	public void DisplayData() {
+		if (data == null) {
+			lblNewLabel.setText("No Product Found");
+		} else {
+			model = (DefaultTableModel) table.getModel();
+			model.setRowCount(0);
+			for (ProductData productData : data) {
+				Object[] data = { productData.getItem_id(), productData.getItem_name(), productData.getItem_type(),
+						productData.getItem_price(), productData.getItem_quantity() };
+				model.addRow(data);
+			}
+		}
 	}
 }

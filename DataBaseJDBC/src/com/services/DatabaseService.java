@@ -1,14 +1,8 @@
 package com.services;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -99,6 +93,7 @@ public class DatabaseService {
 		return null;
 	}
 
+	@SuppressWarnings("resource")
 	public static String ExportProduct() throws IOException {
 		ArrayList<ProductData> data = ReadProductData();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("items.csv")));
@@ -110,11 +105,15 @@ public class DatabaseService {
 				writer.write("Item ID: " + productData.getItem_id() + "\nItem Name: " + productData.getItem_name()
 						+ "\nItem Type: " + productData.getItem_type() + "\nItem Price: " + productData.getItem_price()
 						+ "\nItem Quantity: " + productData.getItem_quantity() + "\n\n");
-
 			}
 			writer.close();
 			return "Import Successfully";
 		}
+	}
 
+	public static boolean DeleteItem(int id) throws SQLException {
+		CallableStatement callableStatement = DbConnect.getInstance().prepareCall("call deleteitem(?)");
+		callableStatement.setInt(1, id);
+		return (!callableStatement.execute()) ? true : false;
 	}
 }
