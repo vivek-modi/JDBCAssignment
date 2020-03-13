@@ -116,4 +116,20 @@ public class DatabaseService {
 		callableStatement.setInt(1, id);
 		return (!callableStatement.execute()) ? true : false;
 	}
+
+	public static boolean UpdateItem(int id, String itemName, String itemType, int price, int qunatity) {
+		try {
+			PreparedStatement statement = DbConnect.getInstance().prepareStatement(
+					"UPDATE items SET item_name=?,item_type=?,item_price=?,item_quantity=? where item_id=?");
+			statement.setString(1, itemName);
+			statement.setString(2, itemType);
+			statement.setInt(3, price);
+			statement.setInt(4, qunatity);
+			statement.setInt(5, id);
+			return (statement.executeUpdate() == 1) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
