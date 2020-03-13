@@ -10,11 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import com.mainscreen.generate.GenerateReport;
+
 import javax.swing.JButton;
 
 public class EmployeeScreen {
 
-	protected JFrame frame;
+	public JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -82,7 +85,7 @@ public class EmployeeScreen {
 				frame.dispose();
 			}
 		});
-		btnNewButton.setBounds(43, 93, 89, 23);
+		btnNewButton.setBounds(62, 93, 139, 23);
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnEmployee = new JButton("Employee");
@@ -92,8 +95,18 @@ public class EmployeeScreen {
 				frame.dispose();
 			}
 		});
-		btnEmployee.setBounds(255, 93, 89, 23);
+		btnEmployee.setBounds(248, 93, 148, 23);
 		frame.getContentPane().add(btnEmployee);
+
+		JButton btnNewButton_1 = new JButton("Generate product");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new GenerateReport().frame.setVisible(true);
+				frame.dispose();
+			}
+		});
+		btnNewButton_1.setBounds(62, 164, 139, 23);
+		frame.getContentPane().add(btnNewButton_1);
 		menu_exit.addActionListener(new ActionListener() {
 
 			@Override
