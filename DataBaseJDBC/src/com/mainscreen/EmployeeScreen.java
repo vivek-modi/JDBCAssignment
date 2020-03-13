@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.mainscreen.generate.GenerateCustomer;
 import com.mainscreen.generate.GenerateEmployee;
 import com.mainscreen.generate.GenerateProduct;
 
@@ -116,8 +117,18 @@ public class EmployeeScreen {
 				frame.dispose();
 			}
 		});
-		btnNewButton_1_1.setBounds(248, 164, 139, 23);
+		btnNewButton_1_1.setBounds(248, 164, 148, 23);
 		frame.getContentPane().add(btnNewButton_1_1);
+
+		JButton btnNewButton_1_1_1 = new JButton("Generate Customer");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new GenerateCustomer().frame.setVisible(true);
+				frame.dispose();
+			}
+		});
+		btnNewButton_1_1_1.setBounds(147, 236, 161, 23);
+		frame.getContentPane().add(btnNewButton_1_1_1);
 		menu_exit.addActionListener(new ActionListener() {
 
 			@Override
