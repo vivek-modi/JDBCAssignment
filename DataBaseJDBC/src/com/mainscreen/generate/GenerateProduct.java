@@ -151,6 +151,10 @@ public class GenerateProduct {
 										? "Data Delete Successfully"
 										: "Error with Deleting Data");
 						ViewData();
+						name.setText("");
+						type.setText("");
+						quantity.setText("");
+						price.setText("");
 					} else {
 						lblNewLabel.setText("Please Select Row From Tabel");
 					}
@@ -190,7 +194,9 @@ public class GenerateProduct {
 					lblNewLabel.setText("Please Select Row From Tabel");
 				} else {
 					lblNewLabel.setText((DatabaseService.UpdateItem(rowId, name.getText(), type.getText(),
-							Integer.parseInt(price.getText()), Integer.parseInt(quantity.getText()))) ? "Update Successfully" : "Not Successfully");
+							Integer.parseInt(price.getText()), Integer.parseInt(quantity.getText())))
+									? "Update Successfully"
+									: "Not Successfully");
 					ViewData();
 				}
 			}

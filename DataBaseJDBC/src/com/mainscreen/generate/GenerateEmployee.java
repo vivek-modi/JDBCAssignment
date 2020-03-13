@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -168,7 +169,22 @@ public class GenerateEmployee {
 		});
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				try {
+					if (table.getSelectedRow() > -1) {
+						lblNewLabel.setText((DatabaseService.DeleteEmployee(
+								table.getModel().getValueAt(table.getSelectedRow(), 1).toString(),
+								table.getModel().getValueAt(table.getSelectedRow(), 2).toString()))
+										? "Data Delete Successfully"
+										: "Error with Deleting Data");
+						ViewData();
+						textField.setText("");
+						textField_1.setText("");
+					} else {
+						lblNewLabel.setText("Please Select Row From Tabel");
+					}
+				} catch (NumberFormatException | SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 

@@ -186,4 +186,11 @@ public class DatabaseService {
 		}
 		return false;
 	}
+
+	public static boolean DeleteEmployee(String firstName, String LastName) throws SQLException {
+		CallableStatement callableStatement = DbConnect.getInstance().prepareCall("call deleteemployee(?,?)");
+		callableStatement.setString(1, firstName);
+		callableStatement.setString(2, LastName);
+		return (!callableStatement.execute()) ? true : false;
+	}
 }
