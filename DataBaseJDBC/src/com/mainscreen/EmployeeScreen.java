@@ -11,7 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.mainscreen.generate.GenerateReport;
+import com.mainscreen.generate.GenerateProduct;
 
 import javax.swing.JButton;
 
@@ -101,7 +101,7 @@ public class EmployeeScreen {
 		JButton btnNewButton_1 = new JButton("Generate product");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new GenerateReport().frame.setVisible(true);
+				new GenerateProduct().frame.setVisible(true);
 				frame.dispose();
 			}
 		});
