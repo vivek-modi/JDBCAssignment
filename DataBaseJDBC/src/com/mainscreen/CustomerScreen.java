@@ -85,11 +85,17 @@ public class CustomerScreen {
 		});
 		btnNewButton.setBounds(101, 189, 128, 37);
 		frame.getContentPane().add(btnNewButton);
-		
+
 		JButton btnAddOrder = new JButton("Add Order");
+		btnAddOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AddOrder().frame.setVisible(true);
+				frame.dispose();
+			}
+		});
 		btnAddOrder.setBounds(354, 189, 128, 37);
 		frame.getContentPane().add(btnAddOrder);
-		
+
 		JLabel lblNewLabel = new JLabel("Welcome To Stock Management");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(169, 51, 249, 37);

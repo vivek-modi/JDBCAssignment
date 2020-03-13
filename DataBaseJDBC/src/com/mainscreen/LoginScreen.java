@@ -99,8 +99,10 @@ public class LoginScreen {
 					DatabaseService databaseService = new DatabaseService();
 					if (databaseService.Login(textField.getText(), textField_1.getText()) == 1) {
 						new CustomerScreen().frame.setVisible(true);
+						frame.dispose();
 					} else if (databaseService.Login(textField.getText(), textField_1.getText()) == 0) {
 						new EmployeeScreen().frame.setVisible(true);
+						frame.dispose();
 					} else {
 						lblNewLabel_2.setText("Error Login");
 					}
