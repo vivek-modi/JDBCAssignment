@@ -276,4 +276,31 @@ public class DatabaseService {
 			return "Import Successfully";
 		}
 	}
+
+	public static boolean InsertOrder(String CName, String itemName, int qunatity, int amount) {
+		try {
+			PreparedStatement statement = DbConnect.getInstance().prepareStatement(
+					"insert into orders(customer_name,item_name,item_quantity,amount) values(?,?,?,?)");
+			statement.setString(1, CName);
+			statement.setString(2, itemName);
+			statement.setInt(3, qunatity);
+			statement.setInt(4, amount);
+			return (statement.executeUpdate() == 1) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static int getItemPrice(String x) throws SQLException {
+		int value = 0;
+		PreparedStatement statement = DbConnect.getInstance()
+				.prepareStatement("SELECT item_price FROM items where item_name=?");
+		statement.setString(1, x);
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()) {
+			value = rs.getInt(1);
+		}
+		return value;
+	}
 }

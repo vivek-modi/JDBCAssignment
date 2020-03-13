@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class CustomerScreen {
 
@@ -44,7 +45,7 @@ public class CustomerScreen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 579, 468);
+		frame.setBounds(100, 100, 579, 349);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
@@ -82,8 +83,17 @@ public class CustomerScreen {
 				frame.dispose();
 			}
 		});
-		btnNewButton.setBounds(100, 151, 128, 37);
+		btnNewButton.setBounds(101, 189, 128, 37);
 		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnAddOrder = new JButton("Add Order");
+		btnAddOrder.setBounds(354, 189, 128, 37);
+		frame.getContentPane().add(btnAddOrder);
+		
+		JLabel lblNewLabel = new JLabel("Welcome To Stock Management");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(169, 51, 249, 37);
+		frame.getContentPane().add(lblNewLabel);
 	}
 
 }
