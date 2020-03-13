@@ -149,7 +149,7 @@ public class DatabaseService {
 		}
 		return null;
 	}
-	
+
 	@SuppressWarnings("resource")
 	public static String ExportEmployee() throws IOException {
 		ArrayList<EmployeeData> data = ReadEmployeeData();
@@ -159,12 +159,31 @@ public class DatabaseService {
 			return "No Data Available to Generate";
 		} else {
 			for (EmployeeData employee : data) {
-				writer.write("Employee ID: " + employee.getId() + "\nEmployee Name: " +employee.getFirstName() + " " + employee.getLastName()
-						+ "\nEmployee Gender: " +employee.getGender()+ "\nEmployee Designation: " + employee.getDesignation()
-						+ "\nEmployee Department: " + employee.getDepartment() + "\n\n");
+				writer.write("Employee ID: " + employee.getId() + "\nEmployee Name: " + employee.getFirstName() + " "
+						+ employee.getLastName() + "\nEmployee Gender: " + employee.getGender()
+						+ "\nEmployee Designation: " + employee.getDesignation() + "\nEmployee Department: "
+						+ employee.getDepartment() + "\n\n");
 			}
 			writer.close();
 			return "Import Successfully";
 		}
+	}
+
+	public static boolean UpdateEmployee(int id, String firstname, String lastName, String gender, String des,
+			String dep) {
+		try {
+			PreparedStatement statement = DbConnect.getInstance().prepareStatement(
+					"UPDATE employees SET firstname=?,lastname=?,gender=?,designation=?,department=? where id=?");
+			statement.setString(1, firstname);
+			statement.setString(2, lastName);
+			statement.setString(3, gender);
+			statement.setString(4, des);
+			statement.setString(5, dep);
+			statement.setInt(6, id);
+			return (statement.executeUpdate() == 1) ? true : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
